@@ -36,8 +36,13 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ],
+    "category": "Business",
     "windows": {
       "webviewInstallMode": { "type": "embedBootstrapper" }
+    },
+    "macOS": {
+      "minimumSystemVersion": "10.15",
+      "signingIdentity": "-"
     }
   }
 }

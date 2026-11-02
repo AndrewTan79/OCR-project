@@ -1,4 +1,4 @@
-name: Build Windows app
+name: Build desktop apps
 
 on:
   push:
@@ -11,7 +11,8 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  windows:
+    name: Windows (.exe)
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -66,3 +67,58 @@ jobs:
           files: |
             out/Evolve-AP-Invoice-OCR.exe
             out/Evolve-AP-Invoice-OCR-Setup.exe
+
+  macos:
+    name: macOS (.dmg, Apple Silicon + Intel)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-darwin,x86_64-apple-darwin
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri -> target
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build app (universal)
+        run: npx tauri build --target universal-apple-darwin --bundles app
+
+      - name: Create disk image
+        run: |
+          APP_DIR=src-tauri/target/universal-apple-darwin/release/bundle/macos
+          APP="$APP_DIR/Evolve AP Invoice OCR.app"
+          test -d "$APP"
+          lipo -info "$APP/Contents/MacOS/"*
+          codesign --verify --verbose "$APP" || true
+          mkdir -p dmg-root out
+          cp -R "$APP" dmg-root/
+          ln -s /Applications dmg-root/Applications
+          hdiutil create -volname "Evolve AP Invoice OCR" -srcfolder dmg-root -ov -format UDZO \
+            out/Evolve-AP-Invoice-OCR-mac.dmg
+          ls -la out
+
+      - name: Upload disk image
+        uses: actions/upload-artifact@v4
+        with:
+          name: Evolve-AP-Invoice-OCR-mac
+          path: out/Evolve-AP-Invoice-OCR-mac.dmg
+          if-no-files-found: error
+
+      - name: Publish release (tags only)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: out/Evolve-AP-Invoice-OCR-mac.dmg
