@@ -46,7 +46,7 @@ const zeroConfidence = (): Record<FieldKey, number> =>
 
 // ================================================================ persistence
 
-const storageKey = () => `evolve-ap-ocr:worksheet:${state.session?.username}`;
+const storageKey = () => `proteus-ap-ocr:worksheet:${state.session?.username}`;
 let saveTimer = 0;
 
 function persist() {
@@ -73,12 +73,12 @@ function restore() {
 // ================================================================ login
 
 function renderLogin(error = "") {
-  document.title = "Sign in – Evolve AP Invoice OCR";
+  document.title = "Sign in – Proteus AP Invoice OCR";
   app.innerHTML = `
   <div class="login">
     <section class="login-brand">
       <div class="brand-mark">${icons.logo(28)}</div>
-      <h1>Evolve AP<br/>Invoice OCR</h1>
+      <h1>Proteus AP<br/>Invoice OCR</h1>
       <p class="lead">Turn supplier invoices into a clean, reviewed AP register in minutes.</p>
       <ul class="features">
         <li>${icons.zap(18)}<span><b>Automatic extraction</b> of vendor, invoice no., date, amount, GST, total &amp; description</span></li>
@@ -128,12 +128,12 @@ function renderLogin(error = "") {
 // ================================================================ shell
 
 function renderShell() {
-  document.title = "Evolve AP Invoice OCR";
+  document.title = "Proteus AP Invoice OCR";
   const s = state.session!;
   app.innerHTML = `
   <div class="shell">
     <header class="topbar">
-      <div class="brand">${icons.logo(22)}<span>Evolve <b>AP Invoice OCR</b></span></div>
+      <div class="brand">${icons.logo(22)}<span>Proteus <b>AP Invoice OCR</b></span></div>
       <div class="topbar-right">
         <span class="privacy-pill">${icons.shield(14)} Local OCR · offline</span>
         <div class="user-chip"><span class="avatar">${esc(s.displayName[0])}</span><span><b>${esc(s.displayName)}</b><small>${esc(s.role)}</small></span></div>

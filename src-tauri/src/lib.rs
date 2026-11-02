@@ -52,5 +52,5 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .invoke_handler(tauri::generate_handler![save_file, reveal_file])
         .run(tauri::generate_context!())
-        .expect("error while running Evolve AP Invoice OCR");
+        .expect("error while running Proteus AP Invoice OCR");
 }

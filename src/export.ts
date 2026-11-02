@@ -20,7 +20,7 @@ const fmt = (n: number) => n.toLocaleString("en-US", { minimumFractionDigits: 2,
 export async function buildExcel(rows: InvoiceRow[], user: string): Promise<Uint8Array> {
   const { default: ExcelJS } = await import("exceljs");
   const wb = new ExcelJS.Workbook();
-  wb.creator = `Evolve AP Invoice OCR (${user})`;
+  wb.creator = `Proteus AP Invoice OCR (${user})`;
   wb.created = new Date();
 
   const ws = wb.addWorksheet("AP Invoices", {
@@ -121,7 +121,7 @@ export async function buildPdf(rows: InvoiceRow[], user: string): Promise<Uint8A
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
   doc.setTextColor(200, 192, 176);
-  doc.text("Evolve AP Invoice OCR", 36, 50);
+  doc.text("Proteus AP Invoice OCR", 36, 50);
   const generated = `Generated ${new Date().toLocaleString("en-GB")} by ${user}`;
   doc.text(generated, pageW - 36 - doc.getTextWidth(generated), 32);
 
@@ -193,7 +193,7 @@ export async function buildPdf(rows: InvoiceRow[], user: string): Promise<Uint8A
     doc.setPage(p);
     doc.setFontSize(8);
     doc.setTextColor(100, 116, 139);
-    doc.text("Values extracted by OCR and reviewed in Evolve AP Invoice OCR.", 36, pageH - 20);
+    doc.text("Values extracted by OCR and reviewed in Proteus AP Invoice OCR.", 36, pageH - 20);
     const label = `Page ${p} of ${pages}`;
     doc.text(label, pageW - 36 - doc.getTextWidth(label), pageH - 20);
   }

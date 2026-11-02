@@ -11,7 +11,7 @@ Invoice No: INV-2024-0457
 Invoice Date: 15 March 2024
 Due Date: 14 April 2024
 Bill To:
-Evolve Holdings Pte Ltd
+Proteus Holdings Pte Ltd
 8 Marina View
 Description Qty Unit Price Amount
 A4 Copier Paper (box of 5 reams) 10 32.00 320.00

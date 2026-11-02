@@ -1,12 +1,12 @@
 [package]
-name = "evolve-ap-ocr"
+name = "proteus-ap-ocr"
 version = "1.0.0"
-description = "Evolve AP Invoice OCR"
-authors = ["Evolve"]
+description = "Proteus AP Invoice OCR"
+authors = ["Proteus"]
 edition = "2021"
 
 [lib]
-name = "evolve_ap_ocr_lib"
+name = "proteus_ap_ocr_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]

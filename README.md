@@ -1,4 +1,4 @@
-# Evolve AP Invoice OCR
+# Proteus AP Invoice OCR
 
 A desktop app for Windows and macOS that reads supplier invoices (PDF or images), extracts the key fields with local OCR, lets you review and correct them in an editable worksheet, and exports the result to Excel and PDF.
 
@@ -12,21 +12,21 @@ The `.exe` is built automatically by GitHub Actions on a clean Windows machine, 
 
 1. Open the repository on GitHub, go to **Actions** and choose **Build desktop apps**.
 2. Click the latest green run.
-3. Under **Artifacts**, download **Evolve-AP-Invoice-OCR-portable** (a zip file).
-4. Extract `Evolve-AP-Invoice-OCR.exe` and move it to your Desktop.
+3. Under **Artifacts**, download **Proteus-AP-Invoice-OCR-portable** (a zip file).
+4. Extract `Proteus-AP-Invoice-OCR.exe` and move it to your Desktop.
 5. Double-click it.
 
 On first launch, Windows SmartScreen may say *"Windows protected your PC"* because the app is not code-signed. Click **More info → Run anyway**. This only happens once.
 
-Requirements: Windows 10 or 11 (64-bit). The app uses Microsoft Edge WebView2, which is already part of Windows 10/11. On an old machine without it, use the **installer** artifact (`Evolve-AP-Invoice-OCR-Setup.exe`), which installs WebView2 automatically.
+Requirements: Windows 10 or 11 (64-bit). The app uses Microsoft Edge WebView2, which is already part of Windows 10/11. On an old machine without it, use the **installer** artifact (`Proteus-AP-Invoice-OCR-Setup.exe`), which installs WebView2 automatically.
 
 ### Mac
 
-1. From the same Actions run, download **Evolve-AP-Invoice-OCR-mac** and unzip it to get `Evolve-AP-Invoice-OCR-mac.dmg`.
-2. Open the `.dmg` and drag **Evolve AP Invoice OCR** into **Applications**.
+1. From the same Actions run, download **Proteus-AP-Invoice-OCR-mac** and unzip it to get `Proteus-AP-Invoice-OCR-mac.dmg`.
+2. Open the `.dmg` and drag **Proteus AP Invoice OCR** into **Applications**.
 3. First launch only: the app is not signed with an Apple Developer ID, so macOS blocks it. Open **System Settings → Privacy & Security**, scroll down and click **Open Anyway** next to the message about the app, then confirm.
    If macOS says the app *"is damaged and can't be opened"*, run this once in Terminal, then open the app again:
-   `xattr -cr "/Applications/Evolve AP Invoice OCR.app"`
+   `xattr -cr "/Applications/Proteus AP Invoice OCR.app"`
 
 Requirements: macOS 10.15 (Catalina) or later. To remove these warnings, the app needs signing and notarization with an Apple Developer account (US$99/year), which can be added to the workflow later.
 
@@ -75,7 +75,7 @@ npm install          # also copies OCR engine + English data into public/ocr
 npm run dev          # browser preview at http://localhost:1420 (exports download as files)
 npm test             # extraction unit tests
 npx tauri dev        # desktop window (needs Rust)
-npx tauri build      # release build -> src-tauri/target/release/evolve-ap-ocr.exe
+npx tauri build      # release build -> src-tauri/target/release/proteus-ap-ocr.exe
 ```
 
 Layout:
