@@ -46,8 +46,8 @@ export async function buildExcel(rows: InvoiceRow[], user: string): Promise<Uint
   const header = ws.getRow(1);
   header.height = 22;
   header.eachCell((c) => {
-    c.font = { bold: true, color: { argb: "FFFFFFFF" } };
-    c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FF4338CA" } };
+    c.font = { bold: true, color: { argb: "FFE9CF94" } };
+    c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FF111114" } };
     c.alignment = { vertical: "middle" };
   });
 
@@ -77,7 +77,7 @@ export async function buildExcel(rows: InvoiceRow[], user: string): Promise<Uint
       statusCell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFFEF3C7" } };
       statusCell.font = { bold: true, color: { argb: "FF92400E" } };
     } else {
-      statusCell.font = { color: { argb: state === "reviewed" ? "FF1D4ED8" : "FF047857" } };
+      statusCell.font = { color: { argb: state === "reviewed" ? "FF96733A" : "FF047857" } };
     }
   });
 
@@ -110,14 +110,17 @@ export async function buildPdf(rows: InvoiceRow[], user: string): Promise<Uint8A
   const pageH = doc.internal.pageSize.getHeight();
 
   // Header band
-  doc.setFillColor(67, 56, 202);
+  doc.setFillColor(13, 13, 15);
   doc.rect(0, 0, pageW, 64, "F");
-  doc.setTextColor(255, 255, 255);
+  doc.setFillColor(212, 178, 106);
+  doc.rect(0, 64, pageW, 1.5, "F");
+  doc.setTextColor(233, 207, 148);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(18);
   doc.text("AP Invoice Register", 36, 32);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
+  doc.setTextColor(200, 192, 176);
   doc.text("Evolve AP Invoice OCR", 36, 50);
   const generated = `Generated ${new Date().toLocaleString("en-GB")} by ${user}`;
   doc.text(generated, pageW - 36 - doc.getTextWidth(generated), 32);
@@ -155,8 +158,8 @@ export async function buildPdf(rows: InvoiceRow[], user: string): Promise<Uint8A
       : undefined,
     theme: "grid",
     styles: { font: "helvetica", fontSize: 8.5, cellPadding: 5, lineColor: [226, 232, 240], lineWidth: 0.5, textColor: [30, 41, 59], overflow: "linebreak" },
-    headStyles: { fillColor: [238, 242, 255], textColor: [55, 48, 163], fontStyle: "bold" },
-    footStyles: { fillColor: [248, 250, 252], textColor: [15, 23, 42], fontStyle: "bold" },
+    headStyles: { fillColor: [24, 23, 27], textColor: [233, 207, 148], fontStyle: "bold" },
+    footStyles: { fillColor: [247, 242, 230], textColor: [60, 45, 15], fontStyle: "bold" },
     alternateRowStyles: { fillColor: [250, 250, 252] },
     columnStyles: {
       0: { cellWidth: 28, halign: "center" },
@@ -178,7 +181,7 @@ export async function buildPdf(rows: InvoiceRow[], user: string): Promise<Uint8A
         data.cell.styles.textColor = [146, 64, 14];
         data.cell.styles.fontStyle = "bold";
       } else if (v === STATUS_LABELS.reviewed) {
-        data.cell.styles.textColor = [29, 78, 216];
+        data.cell.styles.textColor = [150, 115, 50];
       } else {
         data.cell.styles.textColor = [4, 120, 87];
       }
